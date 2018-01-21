@@ -6,15 +6,17 @@
   Доступ к свойствам графических объектов, наблюдение реакции, 
   вывод в консоль отладочной информации.
 
+  path: <home_dir>/.dia/python/
+
 """
 
 import dia
 
 
 def research(data, flags) :
-  print dia.active_display().diagram.get_sorted_selected()
-  print data
-  print flags
+  print "argument 'data' = ", data
+  print "argument 'flags' = ", flags
+  print "sorted_selected = ", dia.active_display().diagram.get_sorted_selected()
   
   objs = dia.active_display().diagram.get_sorted_selected()
   print " "
@@ -22,7 +24,6 @@ def research(data, flags) :
   for obj in objs:
     print "obj.type = ", obj.type
     print "obj.properties = ", obj.properties.keys() 
-
     print "prop obj_bb = ", obj.properties['obj_bb'].value
     print "prop meta = ",obj.properties.get('meta').value
 
