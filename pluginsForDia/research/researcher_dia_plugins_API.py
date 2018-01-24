@@ -28,7 +28,8 @@ def research(data, flags) :
     print "prop meta = ",obj.properties.get('meta').value
 
 
-dia.register_action ("ObjectsResearch", "researcher",
-		     "/DisplayMenu/Objects", 
-		     research)
+dia.register_action("ObjectsResearch",        # Имя регистрируемого Action.
+                    "researcher",             # Название пункта отображаемого в меню. 
+		                "/DisplayMenu/Objects",   # "Родительский" пункт меню.
+		                research)                 # Функция- обработчик Action.
 
