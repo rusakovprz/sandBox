@@ -51,12 +51,15 @@ static FILE mystdout = FDEV_SETUP_STREAM(
 
 void init_uart()
 {
-  
+  //unsigned int ubrr = (unsigned int)(16000000/(baudrate*16))-1;
   // Для частоты микроконтроллера 16МГц и скорости 9600 
   // в регистр скорости следует записать значение 103. 
-  UBRR0L = 103;
-  UBRR0H = 103 >> 8;
-  
+  //UBRR0L = 103;
+  //UBRR0H = 103 >> 8;
+  //Для baudrate = 115200 => ubrr = 7,68
+  UBRR0L = 8;
+  UBRR0H = 8 >> 8;
+    
   // 8 бит данных.
   UCSR0C |= ( 1 << UMSEL01 ) | ( 0 << UCSZ02 ) | ( 1 << UCSZ01 ) | ( 1 << UCSZ00 );
 
