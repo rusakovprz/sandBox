@@ -45,7 +45,7 @@ ISR( TIMER1_OVF_vect )
   inversion_led();
 
   static int counter = 0;
-  printf("counter %d\n", counter++);
+  //printf("counter %d\n", counter++);
 }
 
 
@@ -76,7 +76,17 @@ void inversion_led()
 
 void main_loop()
 {
-  while(1);
+  while(1)
+  {
+    char buf[20];
+    printf("Input sting > ");
+    int n = scanf("%s", buf);
+    
+    if (n > 0)
+    {
+      printf("\nReading %d param [%s]\n", n, buf);
+    }
+  };
 }
 
 

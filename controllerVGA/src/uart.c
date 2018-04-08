@@ -42,11 +42,23 @@ static int my_putchar(char c, FILE *stream)
   return 0;
 }
 
+// функция ввода символа
+static int my_getchar(FILE *stream)
+{
+  loop_until_bit_is_set(UCSR0A, RXC0);
+  
+  //while ( !(UCSR0A & (1<<RXC0)) );
+  
+  //char c = UDR0;
+    
+  return UDR0;
+}
+
 // определяем дескриптор для стандартного вывода
 static FILE mystdout = FDEV_SETUP_STREAM(
                 my_putchar,     // функция вывода символа
-                NULL,           // функция ввода символа, нам сейчас не нужна
-                _FDEV_SETUP_WRITE // флаги потока - только вывод
+                my_getchar,           // функция ввода символа
+                _FDEV_SETUP_RW // флаги потока
 );
 
 void init_uart()
@@ -79,6 +91,7 @@ void init_uart()
   index_item_sender = -1;
   
   stdout = &mystdout;
+  stdin = &mystdout;
 }
 
 
@@ -112,7 +125,7 @@ ISR( USART_RX_vect )
      
   */
   
-  char rxbyte = UDR0;
+//  char rxbyte = UDR0;
 /*  buffer_receiver[index_item_receiver] = rxbyte;
   index_item_receiver += 1;
   
