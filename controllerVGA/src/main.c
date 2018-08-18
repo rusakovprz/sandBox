@@ -45,7 +45,18 @@ ISR( TIMER1_OVF_vect )
   inversion_led();
 
   static int counter = 0;
-  //printf("counter %d\n", counter++);
+  
+  if (counter%2 != 0)
+  {
+    printf("(p) counter %d\n", counter++);
+  }
+  else
+  {
+    const size_t n = 100;
+    char s[n]; 
+    snprintf(s, n, "(s) counter %d\n", counter++);
+    send_string(s);
+  }
 }
 
 
@@ -98,6 +109,11 @@ main()
   sei();         // выставляем бит общего разрешения прерываний.
   
   printf("Firmware start.\n");
-  main_loop();             
+  //printf("\0");
+  //printf("Second string.\n");
+  //printf("\0");
+  
+  while(1){};
+  //main_loop();             
 }
 
